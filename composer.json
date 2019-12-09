@@ -1,0 +1,30 @@
+{
+    "name": "bozhilin/translator",
+    "description": "Translate text",
+    "require": {
+        "ixudra/curl": "^6.18"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "BoZhiLin",
+            "email": "s1410432004@gms.nutc.edu.tw"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "Bozhilin\\Translator\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Bozhilin\\Translator\\TranslatorServiceProvider"
+            ],
+            "aliases": {
+                "Translate": "Bozhilin\\Translator\\Facades\\Translate"
+            }
+        }
+    }
+}
