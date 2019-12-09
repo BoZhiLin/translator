@@ -1,5 +1,6 @@
 {
     "name": "bozhilin/translator",
+    "version": "1.0.0",
     "description": "Translate text",
     "require": {
         "ixudra/curl": "^6.18"
@@ -11,7 +12,6 @@
             "email": "s1410432004@gms.nutc.edu.tw"
         }
     ],
-    "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
             "Bozhilin\\Translator\\": "src/"
