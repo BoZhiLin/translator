@@ -1,0 +1,18 @@
+language: php
+
+php:
+  - 7.2
+
+before_script:
+  - curl -s http://getcomposer.org/installer | php
+  - php composer.phar install --dev
+
+script: phpunit
+
+cache:
+  directories:
+    - vendor
+
+branches:
+  only:
+    - master
