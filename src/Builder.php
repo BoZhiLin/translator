@@ -94,6 +94,10 @@ class Builder
         if (!$response) {
             throw new Exception('Translator connect error. Please check your network status or url set up correctly.');
         }
+
+        if (isset($response->error)) {
+            return new Exception($response->error);
+        }
         
         return $response->extract->translation;
     }
