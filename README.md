@@ -5,6 +5,18 @@
 $ composer require bozhilin/translator
 ```
 
+### Config
+```
+$ php artisan vendor:publish --provider="Bozhilin\Translator\Providers\TranslatorServiceProvider"
+```
+
+### Environment (optional)
+Add a parameter into .env
+Default value is google
+```
+TRANSLATOR_DRIVER=google
+```
+
 ### Including
 ```php
 use Bozhilin\Translator\Facades\Translate;
