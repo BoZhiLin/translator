@@ -3,24 +3,26 @@
 namespace Bozhilin\Translator;
 
 use Exception;
-use Ixudra\Curl\Facades\Curl;
+use Bozhilin\Translator\Tools\Google;
 
 class Builder
 {
-    /**
-     * @var string $string
-     */
+    private $config;
+
     protected $string;
 
-    /**
-     * @var string $source
-     */
     protected $source;
 
-    /**
-     * @var string $target
-     */
     protected $target;
+
+    public function __construct()
+    {
+        if (config('translate')) {
+            $this->config = config('translate');
+        } else {
+            $this->config = include(__DIR__.'/../config/translate.php');
+        }
+    }
 
     /**
      * Set string which will be translated.
@@ -82,23 +84,27 @@ class Builder
      */
     protected function handle()
     {
-        $response = Curl::to('https://google-translate-proxy.herokuapp.com/api/translate')
-            ->withData([
-                'query' => $this->string,
-                'sourceLang' => $this->source,
-                'targetLang' => $this->target
-            ])
-            ->asJson()
-            ->post();
+        $driver = $this->config['defaults']['driver'];
 
-        if (!$response) {
-            throw new Exception('Translator connect error. Please check your network status or url set up correctly.');
+        if (!array_key_exists($driver, $this->config['drivers'])) {
+            throw new Exception('Driver does not exists.');
         }
 
-        if (isset($response->error)) {
-            return new Exception($response->error);
-        }
+        $data = [
+            'api_url' => $this->config['drivers'][$driver]['api_url'],
+            'query' => $this->string,
+            'source' => $this->source,
+            'target' => $this->target
+        ];
         
-        return $response->extract->translation;
+        switch ($driver) {
+            case 'google':
+                return (new Google())->translate($data);
+                break;
+
+            default:
+                throw new Exception('Translate error. Please check your driver.');
+                break;
+        }
     }
 }

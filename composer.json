@@ -1,6 +1,6 @@
 {
     "name": "bozhilin/translator",
-    "version": "1.3.0",
+    "version": "1.4.0",
     "description": "Translate text",
     "require": {
         "ixudra/curl": "^6.18"
@@ -20,7 +20,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Bozhilin\\Translator\\TranslatorServiceProvider"
+                "Bozhilin\\Translator\\Providers\\TranslatorServiceProvider"
             ],
             "aliases": {
                 "Translate": "Bozhilin\\Translator\\Facades\\Translate"

@@ -1,6 +1,6 @@
 <?php
 
-namespace Bozhilin\Translator;
+namespace Bozhilin\Translator\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -25,6 +25,10 @@ class TranslatorServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $path = __DIR__.'/../../config/translate.php';
+        
+        $this->publishes([$path => config_path('translate.php')], 'config');
+
+        $this->mergeConfigFrom($path, 'translate');
     }
 }
